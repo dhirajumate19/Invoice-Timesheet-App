@@ -1,0 +1,19 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust as needed */
+  margin-top: 20px; /* Adjust margin as needed */
+  padding: 10px; /* Adjust padding as needed */
+  background-color: #f0f0f0; /* Adjust background color as needed */
+  width: fit-content; /* Adjust width to fit content */
+  margin: auto; /* Center horizontally */
+  margin-top: 10px;
+}
+.footer {
+  flex: 1;
+}
+
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

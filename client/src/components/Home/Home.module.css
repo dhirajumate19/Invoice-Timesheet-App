@@ -1,0 +1,53 @@
+.content {
+  width: auto;
+  margin: 30px auto;
+  margin-top: 70px;
+  line-height: 60px;
+  display: flex;
+  justify-content: center;
+}
+.content h1 {
+  font-size: 0.5rem;
+  font-weight: 500;
+  line-height: 50px;
+  text-align: center;
+}
+.content p {
+  line-height: 50px;
+  text-align: center;
+  margin-top: 20px;
+  color: gray;
+}
+.imgContent {
+  margin-top: 80px;
+  margin-left: 10%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.content img {
+  width: 1200px;
+  margin: 0px auto;
+}
+
+.sideView {
+  margin-top: 0;
+  margin-left: 20px;
+  padding: 15px;
+  float: left;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  height: 30vh;
+}
+@media (max-width: 768px) {
+  .imgContent {
+    margin-top: 40px; /* Adjust margin for smaller screens */
+    margin-left: 0; /* Remove left margin on smaller screens */
+  }
+
+  .sideView {
+    /* Make sideView take full width on smaller screens */
+    float: none; /* Remove float on smaller screens */
+    margin-top: 20px; /* Adjust margin for smaller screens */
+  }
+}
