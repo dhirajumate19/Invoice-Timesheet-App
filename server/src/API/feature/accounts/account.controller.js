@@ -17,7 +17,7 @@ export const createAccount = async (req, res) => {
       empAddress,
     });
     const response = await dbRequest.save();
-    console.log("response", response);
+
     return res
       .status(201)
       .send(createSuccessResponse(response, "Account Created"));

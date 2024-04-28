@@ -28,8 +28,6 @@ export const loginValidator = async (req, res, next) => {
   try {
     const { empEmail, empPassword } = req.body;
     let dbResponse = await accountModel.findOne({ empEmail: empEmail });
-
-    console.log("emial", dbResponse);
     if (empEmail && empPassword) {
       if (!validateEmail(empEmail)) {
         return res
