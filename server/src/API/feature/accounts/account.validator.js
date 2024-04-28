@@ -1,5 +1,5 @@
 import { createFailedResponse } from "../../util/failedResponse/CreateFailedResponse.js";
-import { account } from "./account.controller.js";
+import accountModel from "./account.model.js";
 export const accountCreation = (req, res, next) => {
   const { empName, empEmail, empPassword, empAddress } = req.body;
   const { building, flatNo, society } = empAddress;
@@ -24,37 +24,45 @@ export const accountCreation = (req, res, next) => {
   next();
 };
 
-export const loginValidator = (req, res, next) => {
-  const { empEmail, empPassword } = req.body;
-  const { empEmail: email, empPassword: password } = account;
-  console.log("emial", email);
-  if (empEmail && empPassword) {
-    if (!validateEmail(empEmail)) {
+export const loginValidator = async (req, res, next) => {
+  try {
+    const { empEmail, empPassword } = req.body;
+    let dbResponse = await accountModel.findOne({ empEmail: empEmail });
+
+    console.log("emial", dbResponse);
+    if (empEmail && empPassword) {
+      if (!validateEmail(empEmail)) {
+        return res
+          .status(400)
+          .send(createFailedResponse(400, "Email is not Enter"));
+      }
+      if (!validateData(empPassword)) {
+        return res
+          .status(400)
+          .send(createFailedResponse(400, "Password is not Enter"));
+      }
+      if (
+        empEmail !== dbResponse.empEmail ||
+        empPassword !== dbResponse.empPassword
+      ) {
+        return res
+          .status(400)
+          .send(createFailedResponse(400, "Email or Password not match"));
+      }
+    } else {
       return res
         .status(400)
-        .send(createFailedResponse(400, "Email is not Enter"));
+        .json(
+          createFailedResponse(
+            401,
+            "Email or Password does not match with you tried"
+          )
+        );
     }
-    if (!validateData(empPassword)) {
-      return res
-        .status(400)
-        .send(createFailedResponse(400, "Password is not Enter"));
-    }
-    if (empEmail !== email || empPassword !== password) {
-      return res
-        .status(400)
-        .send(createFailedResponse(400, "Email or Password not match"));
-    }
-  } else {
-    return res
-      .status(401)
-      .json(
-        createFailedResponse(
-          401,
-          "Email or Password does not match with you tried"
-        )
-      );
+    next();
+  } catch (error) {
+    return res.status(400).json(createFailedResponse(401, "error" + error));
   }
-  next();
 };
 const validateData = (data) => {
   if (!data || data.trim() === 0) {

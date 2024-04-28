@@ -86,7 +86,11 @@ const Timesheet = () => {
               </Grid>
               <Grid item xs={2} style={{ padding: "5px" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="Date" onChange={onHandleChangeDate} />
+                  <DatePicker
+                    label="Date"
+                    onChange={onHandleChangeDate}
+                    renderInpu={(param) => <TextField {...param} />}
+                  />
                 </LocalizationProvider>
               </Grid>
               <Grid item xs={2} style={{ padding: "5px" }}>
