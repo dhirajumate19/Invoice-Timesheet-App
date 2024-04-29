@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import { dbUrl } from "./config.js";
 const connectionDB = () => {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/myecommerce")
+    .connect(`${dbUrl}/myecommerce`)
     .then(() => {
       console.log("Db connected SuccessFully");
     })
